@@ -1,13 +1,17 @@
 #!/usr/bin/node
-let max = 0;
-let secondMax = 0;
-for (const num of process.argv.slice(2).map(Number)) {
-  if (num > max) {
-    secondMax = max;
-    max = num;
+
+const args = process.argv.slice(2);
+
+if (args.length < 2) {
+  console.log(0);
+} else {
+  const nums = [];
+  for (let i = 0; i < args.length; i++) {
+    nums.push(parseInt(args[i], 10));
   }
-  if (num > secondMax && max > num) {
-    secondMax = num;
-  }
+
+  const max = Math.max(...nums);
+  const filtered = nums.filter((n) => n !== max);
+  const secondMax = Math.max(...filtered);
+  console.log(secondMax);
 }
-console.log(secondMax);
